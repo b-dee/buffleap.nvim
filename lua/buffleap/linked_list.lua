@@ -1,5 +1,4 @@
----@diagnostic disable: need-check-nil
-local ListNode = require('list_node')
+local ListNode = require('buffleap.list_node')
 
 local LinkedList = {
   _head = nil,
@@ -76,7 +75,10 @@ function LinkedList:find (callback)
   while current ~= nil do
       -- Call callback on each item and return first match
       if callback(current._data, index) then
-        return current._data
+        return {
+          index = index,
+          data = current._data
+        }
       end
 
       current = current._prev
